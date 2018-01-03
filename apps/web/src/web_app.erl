@@ -14,6 +14,8 @@ start(_Type, _Args) ->
 		{'_', [
 			{"/", hello_world_handler, []},
 			{"/get_id_range", get_id_range_handler, []},
+            {"/set_order", set_order_cache, []},
+            {"/get_order", get_order_cache, []},
 			{"/index", cowboy_static, {priv_file, web, "index.html"}},
 			{"/websocket", ws_handler, []},
 			{"/static/[...]", cowboy_static, {priv_dir, web, "static"}}
@@ -22,11 +24,8 @@ start(_Type, _Args) ->
 	{ok, _} = cowboy:start_clear(http, [{port, 8848}], #{
 		env => #{dispatch => Dispatch}
 	}),
-    service_start_link().
+    web_sup:start_link().
 
-service_start_link()->
-    hello_world_sup:start_link(),
-	websocket_sup:start_link().
 
 stop(_State) ->
 	ok.

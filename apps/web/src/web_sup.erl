@@ -1,7 +1,7 @@
 %% Feel free to use, reuse and abuse the code in this file.
 
 %% @private
--module(hello_world_sup).
+-module(web_sup).
 -behaviour(supervisor).
 
 %% API.

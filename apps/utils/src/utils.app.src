@@ -1,15 +1,10 @@
-{application, web,
- [{description, "An OTP application"},
+{application, utils,
+ [{description, "An OTP library"},
   {vsn, "0.1.0"},
   {registered, []},
-  {mod, { web_app, []}},
   {applications,
    [kernel,
-    stdlib,
-    jsx,
-    ranch,
-    cowboy,
-    utils
+    stdlib
    ]},
   {env,[]},
   {modules, []},

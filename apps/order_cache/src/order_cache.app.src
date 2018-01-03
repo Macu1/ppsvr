@@ -1,15 +1,13 @@
-{application, web,
+{application, order_cache,
  [{description, "An OTP application"},
   {vsn, "0.1.0"},
   {registered, []},
-  {mod, { web_app, []}},
+  {mod, { order_cache_app, []}},
   {applications,
    [kernel,
     stdlib,
-    jsx,
-    ranch,
-    cowboy,
-    utils
+    data_bucket,
+    lager
    ]},
   {env,[]},
   {modules, []},
@@ -18,3 +16,5 @@
   {licenses, ["Apache 2.0"]},
   {links, []}
  ]}.
+
+
