@@ -13,7 +13,7 @@ incr(Key) ->
 
 
 squery(Param) ->
-    F = fun(Worker)-> gen_server:call(Worker,{squery,Param}) end,
+    F = fun(Worker)-> eredis:q(Worker,Param) end,
     poolboy:transaction(redis_pool, F).
 
 

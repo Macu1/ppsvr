@@ -1,4 +1,4 @@
--module(redis_pool_sup).
+-module(mysql_pool_sup).
 
 -behaviour(supervisor).
 
@@ -43,10 +43,11 @@ start_link() ->
 %% @end
 %%--------------------------------------------------------------------
 init([]) ->
-    Name = redis_pool,
+    Name = mysql_pool,
     {ok,{SizeArg,WorkerArg}} = application:get_env(data_bucket,Name),
-    PoolArgs = [{name,{local,Name}},{worker_module,eredis}]++SizeArg,
+    PoolArgs = [{name,{local,Name}},{worker_module,mysql}]++SizeArg,
     PoolSpecs = [poolboy:child_spec(Name,PoolArgs,WorkerArg)],
+    lager:error("pa:~w",[WorkerArg]),
     {ok,{{one_for_one,10,10},PoolSpecs}}.
 
 %%%===================================================================

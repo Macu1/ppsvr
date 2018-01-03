@@ -10,9 +10,18 @@
   {env,[
         {redis_pool,{[{size,10}
                       ,{max_overflow,20}]
-                     ,[{hostname,"172.17.0.3"}
+                     ,[{host,"172.17.0.3"}
                        ,{port,6379}
                       ]}
+        },
+        {mysql_pool,{[{size,10}
+                     ,{max_overflow, 20}]
+                    ,[{host, "10.10.13.11"}
+                     ,{port,3306}
+                     ,{database, "my_order"}
+                     ,{user, "root"}
+                     ,{password, "test"}
+                     ]}
         }
        ]},
   {modules, []},

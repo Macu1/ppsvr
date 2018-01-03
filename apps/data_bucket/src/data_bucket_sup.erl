@@ -29,6 +29,7 @@ start_link() ->
 %% Child :: {Id,StartFunc,Restart,Shutdown,Type,Modules}
 init([]) ->
     redis_pool_sup:start_link(),
+    mysql_pool_sup:start_link(),
     {ok, { {one_for_one, 5, 10},
              [{data_bucket, {data_bucket, start_link,[]}
                 ,temporary, brutal_kill, worker,[data_bucket]}
