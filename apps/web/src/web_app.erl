@@ -18,7 +18,7 @@ start(_Type, _Args) ->
 			{"/static/[...]", cowboy_static, {priv_dir, web, "static"}}
 		]}
 	]),
-	{ok, _} = cowboy:start_clear(http, [{port, 8080}], #{
+	{ok, _} = cowboy:start_clear(http, [{port, 8848}], #{
 		env => #{dispatch => Dispatch}
 	}),
     service_start_link().
