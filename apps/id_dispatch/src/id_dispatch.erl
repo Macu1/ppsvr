@@ -71,7 +71,7 @@ init([]) ->
 
 handle_call({get_id,Caller}, _From,#state{id=NowID}=State)->
     record_get_id(Caller,NowID),
-    {reply,NowID+?IDBase,State#state{id=NowID+?IDBase}};
+    {reply,{NowID,NowID+?IDBase},State#state{id=NowID+?IDBase}};
 
 handle_call(_Request, _From, State) ->
     Reply = ok,

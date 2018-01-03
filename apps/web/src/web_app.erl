@@ -12,8 +12,9 @@
 start(_Type, _Args) ->
 	Dispatch = cowboy_router:compile([
 		{'_', [
-			{"/hello_world", hello_world_handler, []},
-			{"/", cowboy_static, {priv_file, web, "index.html"}},
+			{"/", hello_world_handler, []},
+			{"/get_id_range", get_id_range_handler, []},
+			{"/index", cowboy_static, {priv_file, web, "index.html"}},
 			{"/websocket", ws_handler, []},
 			{"/static/[...]", cowboy_static, {priv_dir, web, "static"}}
 		]}
