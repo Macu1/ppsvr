@@ -52,7 +52,10 @@ get_id(Caller) ->
 %% @end
 %%--------------------------------------------------------------------
 init([]) ->
-    {ok, #state{}}.
+    {ok,MaxID} = redis_do:get("dispatchMaxID"),
+    NowID = check_to_default(MaxID,0),
+    lager:error("redis_get_id:~p",[MaxID]),
+    {ok, #state{id=NowID}}.
 
 %%--------------------------------------------------------------------
 %% @private
@@ -71,7 +74,10 @@ init([]) ->
 
 handle_call({get_id,Caller}, _From,#state{id=NowID}=State)->
     record_get_id(Caller,NowID),
-    {reply,{NowID,NowID+?IDBase},State#state{id=NowID+?IDBase}};
+    RetID = NowID * ?IDBase,
+    {ok,NewID}=redis_do:incr("dispatchMaxID"),
+    NewID2 = check_to_default(NewID,NowID),
+    {reply,{RetID,RetID+?IDBase},State#state{id=NewID2}};
 
 handle_call(_Request, _From, State) ->
     Reply = ok,
@@ -134,3 +140,9 @@ code_change(_OldVsn, State, _Extra) ->
 
 record_get_id(Caller,NowID)->
     lager:error("record get id:~w,~w",[Caller,NowID]).
+
+check_to_default(NewID,_) when is_binary(NewID)->
+    erlang:binary_to_integer(NewID);
+check_to_default(_,NowID) -> NowID.
+
+

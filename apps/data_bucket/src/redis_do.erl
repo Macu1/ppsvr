@@ -1,9 +1,14 @@
 -module(redis_do).
 
--export([get/1]).
+-export([get/1
+        ,incr/1
+        ]).
 
 get(Key)->
     squery(["GET",Key]).
+
+incr(Key) ->
+    squery(["incr",Key]).
 
 
 
