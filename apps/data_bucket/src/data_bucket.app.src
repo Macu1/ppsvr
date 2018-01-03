@@ -1,0 +1,23 @@
+{application, data_bucket,
+ [{description, "db"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {mod, { data_bucket_app, []}},
+  {applications,
+   [kernel,
+    stdlib
+   ]},
+  {env,[
+        {redis_pool,{[{size,10}
+                      ,{max_overflow,20}]
+                     ,[{hostname,"172.17.0.3"}
+                       ,{port,6379}
+                      ]}
+        }
+       ]},
+  {modules, []},
+
+  {maintainers, []},
+  {licenses, ["Apache 2.0"]},
+  {links, []}
+ ]}.
